@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0');
+
+:root {
+  --base-max-width: 1920px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+}
+
+.section-wrapper {
+  --app-bar-height: 80px;
+  scroll-margin-top: var(--app-bar-height);
+  min-height: calc(100vh - var(--app-bar-height));
+}
+
+@media (width < 960px) {
+  .section-wrapper {
+    --app-bar-height: 64px;
+  }
+}
