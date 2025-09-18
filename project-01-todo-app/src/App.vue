@@ -1,11 +1,16 @@
-<script setup></script>
+<script setup>
+import TheAppBar from '@/components/layouts/TheAppBar.vue'
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <v-app class="bg-background-light">
+    <the-app-bar />
+    <v-main>
+      <base-section>
+        <h1>a</h1>
+      </base-section>
+    </v-main>
+  </v-app>
 </template>
 
 <style scoped></style>

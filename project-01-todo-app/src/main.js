@@ -3,7 +3,7 @@ import App from './App.vue'
 
 import { setup } from './plugins'
 
-// import './main.css'
+import '@/assets/main.css'
 
 const app = createApp(App)
 
