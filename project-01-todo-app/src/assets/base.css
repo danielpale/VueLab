@@ -19,15 +19,3 @@ html {
 body {
   min-height: 100vh;
 }
-
-.section-wrapper {
-  --app-bar-height: 80px;
-  scroll-margin-top: var(--app-bar-height);
-  min-height: calc(100vh - var(--app-bar-height));
-}
-
-@media (width < 960px) {
-  .section-wrapper {
-    --app-bar-height: 64px;
-  }
-}

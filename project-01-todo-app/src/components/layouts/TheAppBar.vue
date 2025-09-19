@@ -1,7 +1,7 @@
 <script setup>
 import { useDisplay } from 'vuetify'
 
-import logo from '@/assets/images/logo.svg'
+import logo from '@/assets/images/logo-light.svg'
 
 const emit = defineEmits(['toggle-nav'])
 
@@ -13,7 +13,7 @@ const { smAndDown, mdAndUp } = useDisplay()
     <base-section class="d-flex align-center justify-space-between py-0">
       <div class="the-app-bar__prepend">
         <div class="the-app-bar__logo">
-          <v-img :src="logo" :height="32" :width="32" />
+          <v-img :src="logo" :height="36" :width="36" />
         </div>
         <div class="d-flex align-center ga-2">
           <base-btn
@@ -21,7 +21,7 @@ const { smAndDown, mdAndUp } = useDisplay()
             rounded="0"
             size="36"
             variant="text"
-            color="t-primary"
+            color="t-invert"
             @click="emit('toggle-nav')"
           >
             <v-icon icon="menu" />
@@ -38,11 +38,11 @@ const { smAndDown, mdAndUp } = useDisplay()
 
 <style lang="scss" scoped>
 .the-app-bar {
-  background: transparent !important;
+  background: var(--clr-background-dark) !important;
+  color: var(--clr-text-invert) !important;
   border-bottom-color: var(--clr-border-primary);
   border-bottom-style: solid;
   border-bottom-width: 1px;
-  backdrop-filter: blur(20px);
 
   &__prepend {
     display: flex;
@@ -55,17 +55,6 @@ const { smAndDown, mdAndUp } = useDisplay()
     display: flex;
     gap: 16px;
     align-items: center;
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--clr-background-light);
-    opacity: 0.25;
   }
 
   &__nav {

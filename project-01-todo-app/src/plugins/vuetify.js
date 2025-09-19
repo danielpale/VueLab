@@ -27,6 +27,9 @@ export const vuetify = createVuetify({
           't-invert': '#f3f7f8',
           't-invert-secondary': '#c3d8de',
           't-secondary': '#3b5563',
+
+          'border-primary': '#313f48',
+          'border-secondary': '#9abcc6',
         },
       },
     },
