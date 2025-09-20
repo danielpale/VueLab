@@ -17,6 +17,7 @@ function handleCreateTask() {
 }
 
 function handleAddTask() {
+  if (inputRef.value.value === '') return
   creating.value = false
   emit('on-add-task', inputRef.value.value)
   inputRef.value.value = ''
@@ -54,6 +55,7 @@ function handleAddTask() {
           density="compact"
           placeholder="Escribe la tarea aquí"
           hide-details
+          @keypress.enter="handleAddTask"
         />
         <base-btn @click="handleAddTask">Añadir</base-btn>
       </div>
