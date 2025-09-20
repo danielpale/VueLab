@@ -23,16 +23,16 @@ watch(check, (value) => {
 </script>
 
 <template>
-  <v-card class="list-item bg-transparent">
+  <v-card class="list-item bg-transparent" :class="{ 'list-item--completed': completed }">
     <v-checkbox
       v-model="check"
       hide-details
       density="compact"
-      color="primary"
+      :color="completed ? 'border-secondary' : 'primary'"
       :ripple="false"
       :readonly="readonly"
     />
-    <p class="text-t-primary">{{ title }}</p>
+    <p class="list-item__title text-t-primary">{{ title }}</p>
   </v-card>
 </template>
 
@@ -45,6 +45,15 @@ watch(check, (value) => {
   display: flex;
   align-items: center;
   gap: 8px;
+
+  &--completed {
+    border-color: var(--clr-border-secondary);
+    & > .list-item__title {
+      color: var(--clr-text-secondary) !important;
+      text-decoration-line: line-through;
+      text-decoration-color: var(--clr-border-primary);
+    }
+  }
 }
 </style>
 
