@@ -1,10 +1,37 @@
 <script setup>
-defineProps({ title: String })
+import { ref, watch } from 'vue'
+
+const props = defineProps({
+  id: String,
+  title: String,
+  creationDate: [String, Object],
+  completionDate: [String, Object],
+  completed: Boolean,
+})
+const emit = defineEmits(['on-complete', 'on-decomplete'])
+
+const check = ref(props.completed)
+const readonly = ref(false)
+
+watch(check, (value) => {
+  const event = value ? 'on-complete' : 'on-decomplete'
+  readonly.value = true
+  setTimeout(() => {
+    emit(event, props.id)
+  }, 500)
+})
 </script>
 
 <template>
   <v-card class="list-item bg-transparent">
-    <v-checkbox hide-details density="compact" color="primary" :ripple="false" />
+    <v-checkbox
+      v-model="check"
+      hide-details
+      density="compact"
+      color="primary"
+      :ripple="false"
+      :readonly="readonly"
+    />
     <p class="text-t-primary">{{ title }}</p>
   </v-card>
 </template>
