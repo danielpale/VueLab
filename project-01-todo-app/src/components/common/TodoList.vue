@@ -22,6 +22,10 @@ function handleAddTask() {
   emit('on-add-task', inputRef.value.value)
   inputRef.value.value = ''
 }
+function handleCancelCreateTask() {
+  creating.value = false
+  inputRef.value.value = ''
+}
 </script>
 
 <template>
@@ -57,6 +61,7 @@ function handleAddTask() {
           hide-details
           @keypress.enter="handleAddTask"
         />
+        <base-btn color="background-dark" @click="handleCancelCreateTask">Cancelar</base-btn>
         <base-btn @click="handleAddTask">Añadir</base-btn>
       </div>
     </template>
