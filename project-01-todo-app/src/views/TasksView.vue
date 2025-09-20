@@ -12,7 +12,7 @@ const { completedTasks, incompleteTasks } = storeToRefs(tasksStore)
 <template>
   <div class="task-view">
     <base-section class="d-flex flex-column ga-4">
-      <h6 class="caption ff-text text-uppercase text-t-secondary">[Pendientes]</h6>
+      <h6 class="caption ff-text text-uppercase text-t-secondary">[Tareas Pendientes]</h6>
       <todo-list
         :tasks="incompleteTasks"
         @on-add-task="tasksStore.addTask"
@@ -21,7 +21,7 @@ const { completedTasks, incompleteTasks } = storeToRefs(tasksStore)
     </base-section>
     <base-divider />
     <base-section class="d-flex flex-column ga-4">
-      <h6 class="caption ff-text text-uppercase text-t-secondary">[Terminados]</h6>
+      <h6 class="caption ff-text text-uppercase text-t-secondary">[Tareas Terminadas]</h6>
       <todo-list :tasks="completedTasks" hide-add @on-decomplete-task="tasksStore.decompleteTask" />
     </base-section>
   </div>
