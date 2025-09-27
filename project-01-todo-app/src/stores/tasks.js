@@ -49,5 +49,18 @@ export const useTasksStore = defineStore('task', () => {
     tasks.value[index].completionDate = null
   }
 
-  return { tasks, incompleteTasks, completedTasks, addTask, completeTask, decompleteTask }
+  function deleteTask(id) {
+    const index = tasks.value.findIndex((t) => t.id === id)
+    tasks.value.splice(index, 1)
+  }
+
+  return {
+    tasks,
+    incompleteTasks,
+    completedTasks,
+    addTask,
+    completeTask,
+    decompleteTask,
+    deleteTask,
+  }
 })

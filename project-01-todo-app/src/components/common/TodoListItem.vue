@@ -8,7 +8,7 @@ const props = defineProps({
   completionDate: [String, Object],
   completed: Boolean,
 })
-const emit = defineEmits(['on-complete', 'on-decomplete'])
+const emit = defineEmits(['on-complete', 'on-decomplete', 'on-delete'])
 
 const check = ref(props.completed)
 const readonly = ref(false)
@@ -32,7 +32,17 @@ watch(check, (value) => {
       :ripple="false"
       :readonly="readonly"
     />
-    <p class="list-item__title text-t-primary">{{ title }}</p>
+    <p class="list-item__title text-t-primary flex-grow-1">{{ title }}</p>
+    <base-btn
+      rounded="0"
+      variant="plain"
+      size="32"
+      :color="completed ? 'border-secondary' : 'primary'"
+      v-tooltip:top="{ text: 'Eliminar', contentClass: 'rounded-0 bg-background-dark' }"
+      @click="emit('on-delete', id)"
+    >
+      <v-icon icon="delete" />
+    </base-btn>
   </v-card>
 </template>
 
