@@ -3,12 +3,13 @@ import { nextTick, ref, useTemplateRef } from 'vue'
 
 import TodoListItem from './TodoListItem.vue'
 
-const props = defineProps({ tasks: { type: Array, default: () => [] }, hideAdd: Boolean })
+defineProps({ tasks: { type: Array, default: () => [] }, hideAdd: Boolean })
 const emit = defineEmits([
   'on-complete-task',
   'on-decomplete-task',
   'on-add-task',
   'on-delete-task',
+  'on-update-task',
 ])
 
 const creating = ref(false)
@@ -46,6 +47,7 @@ function handleCancelCreateTask() {
       @on-complete="(id) => emit('on-complete-task', id)"
       @on-decomplete="(id) => emit('on-decomplete-task', id)"
       @on-delete="(id) => emit('on-delete-task', id)"
+      @on-update="(id, newTitle) => emit('on-update-task', id, newTitle)"
     />
     <template v-if="!hideAdd">
       <v-card

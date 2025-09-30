@@ -18,6 +18,7 @@ const { completedTasks, incompleteTasks } = storeToRefs(tasksStore)
         @on-add-task="tasksStore.addTask"
         @on-complete-task="tasksStore.completeTask"
         @on-delete-task="tasksStore.deleteTask"
+        @on-update-task="tasksStore.updateTask"
       />
     </base-section>
     <base-divider />

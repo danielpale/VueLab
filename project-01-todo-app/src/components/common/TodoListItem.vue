@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { nextTick, ref, useTemplateRef, watch } from 'vue'
 
 const props = defineProps({
   id: String,
@@ -8,18 +8,36 @@ const props = defineProps({
   completionDate: [String, Object],
   completed: Boolean,
 })
-const emit = defineEmits(['on-complete', 'on-decomplete', 'on-delete'])
+const emit = defineEmits(['on-complete', 'on-decomplete', 'on-delete', 'on-update'])
 
 const check = ref(props.completed)
 const readonly = ref(false)
+const editing = ref(false)
+const inputRef = useTemplateRef('input')
 
 watch(check, (value) => {
   const event = value ? 'on-complete' : 'on-decomplete'
   readonly.value = true
   setTimeout(() => {
     emit(event, props.id)
-  }, 500)
+  }, 300)
 })
+
+function handleEdit() {
+  if (props.completed) return
+  editing.value = true
+  nextTick(() => {
+    inputRef.value.focus()
+  })
+}
+function handleCancelEdit() {
+  editing.value = false
+}
+function handleUpdate() {
+  if (inputRef.value.value.trim() === '') handleCancelEdit()
+  emit('on-update', props.id, inputRef.value.value)
+  handleCancelEdit()
+}
 </script>
 
 <template>
@@ -32,16 +50,26 @@ watch(check, (value) => {
       :ripple="false"
       :readonly="readonly"
     />
-    <p class="list-item__title text-t-primary flex-grow-1">{{ title }}</p>
+    <v-text-field
+      v-if="editing"
+      :model-value="title"
+      ref="input"
+      class="h-100"
+      variant="plain"
+      density="compact"
+      hide-details
+      @blur="handleUpdate"
+    />
+    <p v-else class="list-item__title text-t-primary" @click="handleEdit">{{ title }}</p>
     <base-btn
       rounded="0"
-      variant="plain"
+      variant="text"
       size="32"
       :color="completed ? 'border-secondary' : 'primary'"
       v-tooltip:top="{ text: 'Eliminar', contentClass: 'rounded-0 bg-background-dark' }"
       @click="emit('on-delete', id)"
     >
-      <v-icon icon="delete" />
+      <v-icon icon="close_small" />
     </base-btn>
   </v-card>
 </template>
@@ -56,13 +84,29 @@ watch(check, (value) => {
   align-items: center;
   gap: 8px;
 
-  &--completed {
-    border-color: var(--clr-border-secondary);
-    & > .list-item__title {
-      color: var(--clr-text-secondary) !important;
-      text-decoration-line: line-through;
-      text-decoration-color: var(--clr-border-primary);
+  &__title {
+    height: 100%;
+    max-height: 32px;
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    cursor: text;
+    position: relative;
+    padding-left: 4px;
+
+    &:hover:not(.list-item--completed .list-item__title) {
+      background: rgba(242, 5, 5, 0.04);
     }
+  }
+}
+
+.list-item--completed {
+  border-color: var(--clr-border-secondary);
+  & .list-item__title {
+    color: var(--clr-text-secondary) !important;
+    text-decoration-line: line-through;
+    text-decoration-color: var(--clr-border-primary);
+    cursor: default;
   }
 }
 </style>

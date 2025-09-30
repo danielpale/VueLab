@@ -54,6 +54,11 @@ export const useTasksStore = defineStore('task', () => {
     tasks.value.splice(index, 1)
   }
 
+  function updateTask(id, newTitle) {
+    const index = tasks.value.findIndex((t) => t.id === id)
+    tasks.value[index].title = newTitle
+  }
+
   return {
     tasks,
     incompleteTasks,
@@ -62,5 +67,6 @@ export const useTasksStore = defineStore('task', () => {
     completeTask,
     decompleteTask,
     deleteTask,
+    updateTask,
   }
 })
