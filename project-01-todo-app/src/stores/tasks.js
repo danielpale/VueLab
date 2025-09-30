@@ -18,7 +18,7 @@ export const useTasksStore = defineStore('task', () => {
 
   function addTask(title) {
     const newTask = {
-      id: crypto.randomUUID(),
+      id: `${new Date()}`,
       title: title,
       creationDate: new Date(),
       completationDate: null,
