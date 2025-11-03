@@ -7,8 +7,14 @@ const router = createRouter({
     {
       path: '/',
       component: TheMainLayout,
-      redirect: { name: 'Game' },
-      children: [{ path: 'game', name: 'Game', component: () => import('@/views/GameView.vue') }],
+      redirect: { name: 'CardPlayground' },
+      children: [
+        {
+          path: 'CardPlayground',
+          name: 'CardPlayground',
+          component: () => import('@/views/CardPlaygroundView.vue'),
+        },
+      ],
     },
   ],
 })
